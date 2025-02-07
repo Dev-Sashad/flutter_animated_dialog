@@ -77,7 +77,6 @@ Future<T?> showAnimatedDialog<T>({
   Alignment alignment = Alignment.center,
   Axis? axis,
 }) {
-  assert(builder != null);
   assert(debugCheckHasMaterialLocalizations(context));
 
   final ThemeData theme = Theme.of(context);
@@ -349,8 +348,7 @@ class CustomDialogWidget extends StatelessWidget {
     this.semanticLabel,
     this.shape,
     this.minWidth,
-  })  : assert(contentPadding != null),
-        super(key: key);
+  })  : super(key: key);
 
   /// The (optional) title of the dialog is displayed in a large font at the top
   /// of the dialog.
@@ -445,7 +443,7 @@ class CustomDialogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     assert(debugCheckHasMaterialLocalizations(context));
     final ThemeData theme = Theme.of(context);
-    final DialogTheme dialogTheme = DialogTheme.of(context);
+    final DialogThemeData dialogTheme = DialogTheme.of(context);
     final List<Widget> children = <Widget>[];
     String? label = semanticLabel;
 
@@ -472,18 +470,18 @@ class CustomDialogWidget extends StatelessWidget {
         case TargetPlatform.android:
         case TargetPlatform.fuchsia:
           label = semanticLabel ??
-              MaterialLocalizations.of(context)?.alertDialogLabel;
+              MaterialLocalizations.of(context).alertDialogLabel;
           break;
         case TargetPlatform.linux:
           label = semanticLabel ??
-              MaterialLocalizations.of(context)?.alertDialogLabel;
+              MaterialLocalizations.of(context).alertDialogLabel;
           break;
         case TargetPlatform.macOS:
           label = semanticLabel;
           break;
         case TargetPlatform.windows:
           label = semanticLabel ??
-              MaterialLocalizations.of(context)?.alertDialogLabel;
+              MaterialLocalizations.of(context).alertDialogLabel;
           break;
       }
     }
@@ -631,7 +629,7 @@ class CustomDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DialogTheme dialogTheme = DialogTheme.of(context);
+    final DialogThemeData dialogTheme = DialogTheme.of(context);
     return AnimatedPadding(
       padding: MediaQuery.of(context).viewInsets +
           const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
